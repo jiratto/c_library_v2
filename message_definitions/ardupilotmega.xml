@@ -1589,5 +1589,19 @@
       <field type="uint16_t[4]" name="rpm" units="rpm">RPM (eRPM).</field>
       <field type="uint16_t[4]" name="count">count of telemetry packets received (wraps at 65535).</field>
     </message>
+    <message id="228" name="WEATHER_INFO">
+         <description>Weather Status</description>
+         <field type="float" name="wind_angle" units="degrees">Wind Angle, 0 to 359 degrees</field>
+         <field type="float" name="wind_speed_true" units="m/s">Wind Speed True</field>
+         <field type="float" name="wind_speed_relative" units="">Wind Speed Relative</field>
+         <field type="float" name="pressure_bar" units="bars">Barometric pressure</field>
+         <field type="float" name="air_temperature" units="degC">Air temperature</field>
+         <field type="float" name="relative_humidity" units="percent">Relative humidity</field>
+         <field type="float" name="water_depth" units="meters">Water depth relative to transducer</field>
+         <field type="float" name="water_temperature" units="degC">Water temperature</field>
+         <field type="float" name="water_speed" units="knots">Speed of vessel relative to the water</field>
+         <field type="float" name="total_miles" units="Nautical Miles">Total cumulative water distance</field>
+         <field type="float" name="miles_since_reset" units="Nautical Miles">Water distance since Reset</field>
+       </message>
   </messages>
 </mavlink>
