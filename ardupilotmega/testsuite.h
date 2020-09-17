@@ -3538,20 +3538,21 @@ static void mavlink_test_weather_info(uint8_t system_id, uint8_t component_id, m
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_weather_info_t packet_in = {
-        17.0,45.0,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0
+        17.0,45.0,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0,325.0
     };
     mavlink_weather_info_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
-        packet1.wind_angle = packet_in.wind_angle;
+        packet1.wind_angle_true = packet_in.wind_angle_true;
+        packet1.wind_angle_relative = packet_in.wind_angle_relative;
         packet1.wind_speed_true = packet_in.wind_speed_true;
         packet1.wind_speed_relative = packet_in.wind_speed_relative;
-        packet1.pressure_bar = packet_in.pressure_bar;
+        packet1.air_pressure_bar = packet_in.air_pressure_bar;
         packet1.air_temperature = packet_in.air_temperature;
-        packet1.relative_humidity = packet_in.relative_humidity;
+        packet1.air_relative_humidity = packet_in.air_relative_humidity;
         packet1.water_depth = packet_in.water_depth;
         packet1.water_temperature = packet_in.water_temperature;
         packet1.water_speed = packet_in.water_speed;
-        packet1.total_miles = packet_in.total_miles;
+        packet1.miles_total = packet_in.miles_total;
         packet1.miles_since_reset = packet_in.miles_since_reset;
         
         
@@ -3567,12 +3568,12 @@ static void mavlink_test_weather_info(uint8_t system_id, uint8_t component_id, m
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_weather_info_pack(system_id, component_id, &msg , packet1.wind_angle , packet1.wind_speed_true , packet1.wind_speed_relative , packet1.pressure_bar , packet1.air_temperature , packet1.relative_humidity , packet1.water_depth , packet1.water_temperature , packet1.water_speed , packet1.total_miles , packet1.miles_since_reset );
+    mavlink_msg_weather_info_pack(system_id, component_id, &msg , packet1.wind_angle_true , packet1.wind_angle_relative , packet1.wind_speed_true , packet1.wind_speed_relative , packet1.air_pressure_bar , packet1.air_temperature , packet1.air_relative_humidity , packet1.water_depth , packet1.water_temperature , packet1.water_speed , packet1.miles_total , packet1.miles_since_reset );
     mavlink_msg_weather_info_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_weather_info_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.wind_angle , packet1.wind_speed_true , packet1.wind_speed_relative , packet1.pressure_bar , packet1.air_temperature , packet1.relative_humidity , packet1.water_depth , packet1.water_temperature , packet1.water_speed , packet1.total_miles , packet1.miles_since_reset );
+    mavlink_msg_weather_info_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.wind_angle_true , packet1.wind_angle_relative , packet1.wind_speed_true , packet1.wind_speed_relative , packet1.air_pressure_bar , packet1.air_temperature , packet1.air_relative_humidity , packet1.water_depth , packet1.water_temperature , packet1.water_speed , packet1.miles_total , packet1.miles_since_reset );
     mavlink_msg_weather_info_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -3585,7 +3586,7 @@ static void mavlink_test_weather_info(uint8_t system_id, uint8_t component_id, m
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_weather_info_send(MAVLINK_COMM_1 , packet1.wind_angle , packet1.wind_speed_true , packet1.wind_speed_relative , packet1.pressure_bar , packet1.air_temperature , packet1.relative_humidity , packet1.water_depth , packet1.water_temperature , packet1.water_speed , packet1.total_miles , packet1.miles_since_reset );
+    mavlink_msg_weather_info_send(MAVLINK_COMM_1 , packet1.wind_angle_true , packet1.wind_angle_relative , packet1.wind_speed_true , packet1.wind_speed_relative , packet1.air_pressure_bar , packet1.air_temperature , packet1.air_relative_humidity , packet1.water_depth , packet1.water_temperature , packet1.water_speed , packet1.miles_total , packet1.miles_since_reset );
     mavlink_msg_weather_info_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
