@@ -1604,5 +1604,10 @@
       <field type="float" name="miles_total" units="Nautical Miles">Total cumulative water distance</field>
       <field type="float" name="miles_since_reset" units="Nautical Miles">Water distance since Reset</field>
     </message>
+    <message id="229" name="WATER_SPEED">
+      <description>Water Speed</description>
+      <field type="float" name="water_speed_true" units="knots">Speed in knots</field>
+      <field type="float" name="water_speed_relative" units="km/h">Speed relative to water in Kilometers/hr</field>
+    </message>
   </messages>
 </mavlink>
