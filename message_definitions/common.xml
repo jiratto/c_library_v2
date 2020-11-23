@@ -5796,6 +5796,49 @@
       <field type="uint16_t" name="rotation" units="deg">Video image rotation clockwise</field>
       <field type="uint16_t" name="hfov" units="deg">Horizontal Field of view</field>
     </message>
+    <message id="271" name="MANUAL_OVERRIDE_LOCATION">
+      <description>Location where manual override occurs</description>
+      <field type="int32_t" name="lat" units="degE7">Latitude, expressed as degrees * 1E7</field>
+      <field type="int32_t" name="lon" units="degE7">Longitude, expressed as degrees * 1E7</field>
+      <field type="int32_t" name="relative_alt" units="mm">Relative altitude in meters, expressed as * 1000 (millimeters)</field>
+    </message>
+    <message id="272" name="BATTERY_FS_WARNING">
+      <description>Send warning to GCS before triggering RTL</description>
+      <field type="uint8_t" name="battery_fs">Battery failsafe status</field>
+    </message>
+    <message id="273" name="PAYLOAD_SPOOL_STATUS">
+      <description>Send the status of a rope spool that holding the payload</description>
+      <field type="int8_t" name="rotating_direction">Spool rotating direction and power, pos down, neg up</field>
+      <field type="int32_t" name="dropped_length">Spool dropped length</field>
+    </message>
+    <message id="274" name="WATER_LEVEL_SENSOR">
+      <description>Send water level status to GCS</description>
+      <field type="uint8_t" name="water_level">Water level (1: available, 0: unavailable)</field>
+      <field type="int8_t" name="countdown">Out of water action countdown (-1: unavailable other: countdown)</field>
+    </message>
+    <message id="275" name="FMU_SYSTEM_ID">
+      <description>Send FMU system ID to GCS</description>
+      <field type="char[40]" name="fmu_system_id">System ID from FMU</field>
+    </message>
+    <message id="276" name="PRX_DISTANCE">
+      <description>Send Proximity Data to GCS</description>
+      <field type="uint8_t" name="health"></field>
+      <field type="uint8_t" name="enable"></field>
+      <field type="float" name="dist0"></field>
+      <field type="float" name="dist45"></field>
+      <field type="float" name="dist90"></field>
+      <field type="float" name="dist135"></field>
+      <field type="float" name="dist180"></field>
+      <field type="float" name="dist225"></field>
+      <field type="float" name="dist270"></field>
+      <field type="float" name="dist315"></field>
+      <field type="float" name="closest_angle"></field>
+      <field type="float" name="closest_dist"></field>
+    </message>
+    <message id="277" name="FAILSAFE_REASON">
+      <description>Send reasoning to GCS before triggering failsafe</description>
+      <field type="uint8_t" name="fs_reason">failsafe reason</field>
+    </message>
     <message id="299" name="WIFI_CONFIG_AP">
       <description>Configure AP SSID and Password.</description>
       <field type="char[32]" name="ssid">Name of Wi-Fi network (SSID). Leave it blank to leave it unchanged.</field>
