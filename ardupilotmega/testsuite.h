@@ -3646,6 +3646,122 @@ static void mavlink_test_water_speed(uint8_t system_id, uint8_t component_id, ma
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
+static void mavlink_test_rtnasv_adc(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_RTNASV_ADC >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_rtnasv_adc_t packet_in = {
+        17235,17339,17443,17547,17651,17755,17859,17963
+    };
+    mavlink_rtnasv_adc_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.adc1 = packet_in.adc1;
+        packet1.adc2 = packet_in.adc2;
+        packet1.adc3 = packet_in.adc3;
+        packet1.adc4 = packet_in.adc4;
+        packet1.adc5 = packet_in.adc5;
+        packet1.adc6 = packet_in.adc6;
+        packet1.adc7 = packet_in.adc7;
+        packet1.adc8 = packet_in.adc8;
+        
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_RTNASV_ADC_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_RTNASV_ADC_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_adc_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_rtnasv_adc_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_adc_pack(system_id, component_id, &msg , packet1.adc1 , packet1.adc2 , packet1.adc3 , packet1.adc4 , packet1.adc5 , packet1.adc6 , packet1.adc7 , packet1.adc8 );
+    mavlink_msg_rtnasv_adc_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_adc_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.adc1 , packet1.adc2 , packet1.adc3 , packet1.adc4 , packet1.adc5 , packet1.adc6 , packet1.adc7 , packet1.adc8 );
+    mavlink_msg_rtnasv_adc_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_rtnasv_adc_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_adc_send(MAVLINK_COMM_1 , packet1.adc1 , packet1.adc2 , packet1.adc3 , packet1.adc4 , packet1.adc5 , packet1.adc6 , packet1.adc7 , packet1.adc8 );
+    mavlink_msg_rtnasv_adc_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
+static void mavlink_test_rtnasv_gpio(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_RTNASV_GPIO >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_rtnasv_gpio_t packet_in = {
+        5,72
+    };
+    mavlink_rtnasv_gpio_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.gpio0 = packet_in.gpio0;
+        packet1.gpio1 = packet_in.gpio1;
+        
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_RTNASV_GPIO_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_RTNASV_GPIO_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_gpio_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_rtnasv_gpio_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_gpio_pack(system_id, component_id, &msg , packet1.gpio0 , packet1.gpio1 );
+    mavlink_msg_rtnasv_gpio_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_gpio_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.gpio0 , packet1.gpio1 );
+    mavlink_msg_rtnasv_gpio_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_rtnasv_gpio_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_rtnasv_gpio_send(MAVLINK_COMM_1 , packet1.gpio0 , packet1.gpio1 );
+    mavlink_msg_rtnasv_gpio_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
 static void mavlink_test_ardupilotmega(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
     mavlink_test_sensor_offsets(system_id, component_id, last_msg);
@@ -3709,6 +3825,8 @@ static void mavlink_test_ardupilotmega(uint8_t system_id, uint8_t component_id, 
     mavlink_test_esc_telemetry_9_to_12(system_id, component_id, last_msg);
     mavlink_test_weather_info(system_id, component_id, last_msg);
     mavlink_test_water_speed(system_id, component_id, last_msg);
+    mavlink_test_rtnasv_adc(system_id, component_id, last_msg);
+    mavlink_test_rtnasv_gpio(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus

@@ -1589,6 +1589,7 @@
       <field type="uint16_t[4]" name="rpm" units="rpm">RPM (eRPM).</field>
       <field type="uint16_t[4]" name="count">count of telemetry packets received (wraps at 65535).</field>
     </message>
+    <!-- RTNASV -->
     <message id="228" name="WEATHER_INFO">
       <description>Weather Status</description>
       <field type="float" name="wind_angle_true" units="degrees">Wind Angle True</field>
@@ -1608,6 +1609,22 @@
       <description>Water Speed</description>
       <field type="float" name="water_speed_true" units="knots">Speed in knots</field>
       <field type="float" name="water_speed_relative" units="km/h">Speed relative to water in Kilometers/hr</field>
+    </message>
+    <message id="223" name="RTNASV_ADC">
+      <description>RTNASV ADC output.</description>
+      <field type="uint16_t" name="adc1" units="mv">ADC output 1.(address:0x48,P101)</field>
+      <field type="uint16_t" name="adc2" units="mv">ADC output 2.(address:0x48,P105)</field>
+      <field type="uint16_t" name="adc3" units="mv">ADC output 3.(address:0x48,P107)</field>
+      <field type="uint16_t" name="adc4" units="mv">ADC output 4.(address:0x48,P109)</field>
+      <field type="uint16_t" name="adc5" units="mv">ADC output 5.(address:0x49,P111)</field>
+      <field type="uint16_t" name="adc6" units="mv">ADC output 6.(address:0x49,P113)</field>
+      <field type="uint16_t" name="adc7" units="mv">ADC output 7.(address:0x49,P115)</field>
+      <field type="uint16_t" name="adc8" units="mv">ADC output 8.(address:0x49,P117)</field>
+    </message>
+    <message id="224" name="RTNASV_GPIO">
+      <description>RTNASV GPIO output.</description>
+      <field type="uint8_t" name="gpio0">TCA9534A#1</field>
+      <field type="uint8_t" name="gpio1">TCA9534A#2</field>
     </message>
   </messages>
 </mavlink>
